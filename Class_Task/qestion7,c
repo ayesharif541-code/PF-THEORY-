@@ -1,0 +1,34 @@
+
+#include <stdio.h>
+
+int main(void)
+{
+    long long n;
+
+    printf("Enter a number: ");
+    if (scanf("%lld", &n) != 1 || n < 0)
+    {
+        printf("Invalid input.\n");
+        return 1;
+    }
+
+    if (n == 0)
+    {
+        printf("Digital root = 0\n");
+        return 0;
+    }
+
+    while (n >= 10)
+    {
+        long long sum = 0;
+        while (n > 0)
+        {
+            sum += n % 10;
+            n /= 10;
+        }
+        n = sum;
+    }
+
+    printf("Digital root = %lld\n", n);
+    return 0;
+}

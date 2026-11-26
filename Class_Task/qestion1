@@ -1,0 +1,85 @@
+#include <stdio.h>
+
+int main()
+{
+    int x, y, i, j;
+    int id[10][20], age[10][20];
+    float salary[10][20], total[10];
+    int lowId, highAge;
+    float lowSalary, highSalary, highTotal;
+
+    printf("Enter number of departments: ");
+    scanf("%d", &x);
+
+    printf("Enter number of faculty in each department: ");
+    scanf("%d", &y);
+
+    for(i = 0; i < x; i++)
+    {
+        total[i] = 0;
+
+        printf("\nDepartment %d\n", i + 1);
+
+        for(j = 0; j < y; j++)
+        {
+            printf("Enter Faculty ID: ");
+            scanf("%d", &id[i][j]);
+
+            printf("Enter age: ");
+            scanf("%d", &age[i][j]);
+
+            printf("Enter salary: ");
+            scanf("%f", &salary[i][j]);
+
+            total[i] = total[i] + salary[i][j];
+        }
+    }
+
+    lowSalary = salary[0][0];
+    highSalary = salary[0][0];
+    lowId = id[0][0];
+    highAge = age[0][0];
+
+    printf("\nFaculty Information\n");
+
+    for(i = 0; i < x; i++)
+    {
+        for(j = 0; j < y; j++)
+        {
+            printf("\nDepartment: %d", i + 1);
+            printf("\nFaculty ID: %d", id[i][j]);
+            printf("\nSalary: %.2f", salary[i][j]);
+            printf("\nAge: %d\n", age[i][j]);
+
+            if(salary[i][j] < lowSalary)
+            {
+                lowSalary = salary[i][j];
+                lowId = id[i][j];
+            }
+
+            if(salary[i][j] > highSalary)
+            {
+                highSalary = salary[i][j];
+                highAge = age[i][j];
+            }
+        }
+    }
+
+    highTotal = total[0];
+    int highDept = 1;
+
+    for(i = 1; i < x; i++)
+    {
+        if(total[i] > highTotal)
+        {
+            highTotal = total[i];
+            highDept = i + 1;
+        }
+    }
+
+    printf("\nFaculty ID with lowest salary: %d", lowId);
+    printf("\nAge of faculty with highest salary: %d", highAge);
+    printf("\nDepartment with highest total salary: %d\n", highDept);
+
+    return 0;
+}
